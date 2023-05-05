@@ -1,0 +1,64 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProjectFruit</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        .login-content {
+            width: 500px;
+            margin: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            left: 50%;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px #0000003d;
+        }
+    </style>
+</head>
+<body>
+    @RenderBody()
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+         //function validatePassword() {
+         //    var password = document.getElementById("registerPassword");
+         //    var confirmPassword = document.getElementById("registerRepeatPassword");
+         //    var confirmPasswordError = document.getElementById("confirmPasswordError");
+
+         //    if (password.value != confirmPassword.value) {
+         //        confirmPasswordError.innerHTML = "Passwords do not match.";
+         //        return false;
+         //    }
+
+         //    confirmPasswordError.innerHTML = "";
+         //    return true;
+         //}
+        //$(document).ready(function() {
+
+
+
+        //     $('#tab-register').on("click", function() {
+        //         $('#tab-register').toggleClass('active');
+        //         $('#tab-login').removeClass('active');
+        //         $('#pills-register').toggleClass('show active');
+        //         $('#pills-login').removeClass('show active');
+        //     });
+
+        //     $('#tab-login').on("click", function () {
+        //         $('#tab-login').toggleClass('active');
+        //         $('#tab-register').removeClass('active');
+        //         $('#pills-login').toggleClass('show active');
+        //         $('#pills-register').removeClass('show active');
+        //     });
+
+        //});
+    </script>
+</body>
+</html>

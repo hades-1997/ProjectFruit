@@ -1,0 +1,46 @@
+﻿@model ProjectFruit.Models.User;
+
+<div class="login-content">
+    <div class="tab-content">            
+        <div class="tab-pane show active">
+
+            <form asp-action="register" asp-controller="darshboard" method="post">
+
+                <div class="form-outline mb-4">
+                    <label class="form-label" asp-for="Username">Username</label>
+                    <input class="form-control" asp-for="Username" />
+                </div>
+
+                <div class="form-outline mb-4">
+                    <label class="form-label" asp-for="Email">Email</label>
+                    <input class="form-control" asp-for="Email" type="email"/>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <label class="form-label" asp-for="Password">Password</label>
+                    <input type="password" id="Password" class="form-control" asp-for="Password" />
+                </div>
+
+                <div class="form-outline mb-4">
+                    <label class="form-label" asp-for="ConfirmPassword">Repeat password</label>
+                    <input type="password" id="confirmPassword" class="form-control" asp-for="ConfirmPassword" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="form-check d-flex justify-content-center mb-4">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
+                            aria-describedby="registerCheckHelpText" />
+                    <label class="form-check-label" for="registerCheck">
+                        I have read and agree to the terms
+                    </label>
+                </div>
+                 <div class="form-outline mb-4">
+                     <span  class="text-danger" >@ViewBag.msg </span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+

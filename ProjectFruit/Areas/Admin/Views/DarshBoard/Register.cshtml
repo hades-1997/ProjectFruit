@@ -3,48 +3,46 @@
 @{
     Layout = "_Admin";
 }
-
 <div class="login-content">
-    <div class="tab-content">            
+    <div class="tab-content">
         <div class="tab-pane show active">
-
-            <form asp-action="register" asp-controller="DarshBoard" method="post">
-
+            <form asp-action="Register" method="post">
                 <div class="form-outline mb-4">
-                    <label class="form-label" asp-for="Username">Username</label>
-                    <input class="form-control" asp-for="Username" />
+                    <label class="form-label" >Username</label>
+                    <input class="form-control" name="Username" />
                 </div>
 
                 <div class="form-outline mb-4">
-                    <label class="form-label" asp-for="Email">Email</label>
-                    <input class="form-control" asp-for="Email" type="email"/>
+                    <label class="form-label">Email</label>
+                    <input class="form-control" type="email" name="Email"  />
                 </div>
 
                 <div class="form-outline mb-4">
-                    <label class="form-label" asp-for="Password">Password</label>
-                    <input type="password" id="Password" class="form-control" asp-for="Password" />
+                    <label class="form-label">Password</label>
+                    <input type="password" id="Password" class="form-control" name="Password"  />
                 </div>
 
                 <div class="form-outline mb-4">
-                    <label class="form-label" asp-for="ConfirmPassword">Repeat password</label>
-                    <input type="password" id="confirmPassword" class="form-control" asp-for="ConfirmPassword" />
+                    <label class="form-label">Repeat password</label>
+                    <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" />
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
-
+                
                 <div class="form-check d-flex justify-content-center mb-4">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
-                            aria-describedby="registerCheckHelpText" />
-                    <label class="form-check-label" for="registerCheck">
-                        I have read and agree to the terms
-                    </label>
+                <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
+                aria-describedby="registerCheckHelpText" />
+                <label class="form-check-label" for="registerCheck">
+                I have read and agree to the terms
+                </label>
                 </div>
-                 <div class="form-outline mb-4">
-                     <span  class="text-danger" >@ViewBag.msg </span>
+                <div class="form-outline mb-4">
+                    <span class="text-danger">@ViewBag.msg </span>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 </div>
+
                 <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
             </form>
 
         </div>
     </div>
 </div>
-

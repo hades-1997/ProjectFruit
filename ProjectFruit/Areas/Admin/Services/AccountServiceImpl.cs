@@ -6,10 +6,12 @@ namespace ProjectFruit.Areas.Admin.Services
     public class AccountServiceImpl : AccountService
     {
         private DatabaseContext dbContext;
+        private IConfiguration config;
 
-        public AccountServiceImpl(DatabaseContext _dbContext)
+        public AccountServiceImpl(DatabaseContext _dbContext, IConfiguration _config)
         {
             dbContext = _dbContext;
+            config = _config;
         }
 
         public List<User> findAll()
@@ -58,10 +60,26 @@ namespace ProjectFruit.Areas.Admin.Services
 
         public User Register(User user)
         {
-
             dbContext.Users.Add(user);
             dbContext.SaveChanges();
             return user;
         }
+
+        public Boolean userExistsAsync(string username)
+        {
+            var result = dbContext.Users.FirstOrDefault(res => res.Username == username);
+         
+            if(result != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+
     }
 }

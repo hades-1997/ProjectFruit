@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\NET_CORE\ProjectFruit\ProjectFruit
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/NET_CORE/ProjectFruit/ProjectFruit/Areas/Admin/Views/DarshBoard/CreateAuthor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFyc2hCb2FyZFxDcmVhdGVBdXRob3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/NET_CORE/ProjectFruit/ProjectFruit/Areas/Admin/Views/DarshBoard/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFyc2hCb2FyZFxEYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

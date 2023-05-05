@@ -1,4 +1,25 @@
 ﻿@ViewBag.username
 <h3>DarshBoard</h3>
-
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Name</th>
+            <th scope="col">Author</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var res in ViewBag.users)
+        {
+            <tr>
+                <th scope="row">@res.Id</th>
+                <td>@res.Username</td>
+                <td>@res.Email</td>
+                <td>@res.Author.AuthorName</td>
+            </tr> 
+        }
+        
+    </tbody>
+</table>
 <a href="admin/logout">Logout</a>

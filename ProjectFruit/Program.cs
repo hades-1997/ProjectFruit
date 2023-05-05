@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ProjectFruit.Models;
 using ProjectFruit.Areas.Admin.Services;
+using ProjectFruit.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
 }
 app.UseStaticFiles();
+
+app.UseMiddleware<LogMiddleware>();
 
 app.UseRouting();
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace ProjectFruit.Models;
 
@@ -11,10 +10,6 @@ public partial class User
     public string? Username { get; set; }
 
     public string? Password { get; set; }
-
-    [Compare("Password")]
-    [DataType(DataType.Password)]
-    public string? ConfirmPassword { get; set; }
 
     public string? Email { get; set; }
 

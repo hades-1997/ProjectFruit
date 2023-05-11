@@ -1,4 +1,5 @@
-﻿using ProjectFruit.Models;
+﻿using ProjectFruit.Helpers;
+using ProjectFruit.Models;
 using System.Security.Claims;
 
 namespace ProjectFruit.Areas.Admin.Services
@@ -21,7 +22,8 @@ namespace ProjectFruit.Areas.Admin.Services
 
         public User PasswordSignInAsync(string username, string password)
         {
-            var users = dbContext.Users.FirstOrDefault(u => u.Username == username);
+            string Hashusername = MD5Helper.HashstringMd5(username);
+            var users = dbContext.Users.FirstOrDefault(u => u.Username == Hashusername);
             if (users != null)
             {
                 bool isPasswordCorrect = BCrypt.Net.BCrypt.Verify(password, users.Password);
@@ -80,6 +82,17 @@ namespace ProjectFruit.Areas.Admin.Services
 
         }
 
+        public User UpdateUser(User user)
+        {
+            dbContext.Users.Update(user);
+            dbContext.SaveChanges();
+            return user;
+        }
 
+        public User findUserName(string username)
+        {
+           var result =  dbContext.Users.FirstOrDefault(res => res.Username == username);
+            return result;
+        }
     }
 }

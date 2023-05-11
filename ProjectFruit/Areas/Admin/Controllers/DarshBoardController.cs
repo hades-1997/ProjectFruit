@@ -6,9 +6,12 @@ using System.Security.Claims;
 using ProjectFruit.Areas.Admin.Services;
 using ProjectFruit.Controllers;
 using ProjectFruit.Models;
-using CyberSource.Clients.SoapServiceReference;
 using ProjectFruit.Helpers;
 using System.Text.Encodings.Web;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Http;
+using NuGet.Packaging.Signing;
+using CyberSource.Clients.SoapServiceReference;
 
 namespace ProjectFruit.Areas.Admin.Controllers
 {
@@ -55,10 +58,19 @@ namespace ProjectFruit.Areas.Admin.Controllers
             var result = accountService.PasswordSignInAsync(username, password);
             if (result != null)
             {
-                ClaimsIdentity claimsIdentity = new ClaimsIdentity(accountService.GetUserClaims(result), CookieAuthenticationDefaults.AuthenticationScheme);
-                ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
-                return RedirectToAction("dashboard", "DarshBoard", new { area = "admin" });
+               if(result.Status == 0)
+                {
+                    ViewBag.msg = "Tài Khoản chưa được kích hoạt";
+                    return View("Login");
+
+                }
+                else
+                {
+                    ClaimsIdentity claimsIdentity = new ClaimsIdentity(accountService.GetUserClaims(result), CookieAuthenticationDefaults.AuthenticationScheme);
+                    ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
+                    return RedirectToAction("dashboard", "DarshBoard", new { area = "admin" });
+                }
             }
             else
             {
@@ -94,7 +106,7 @@ namespace ProjectFruit.Areas.Admin.Controllers
             else
             {
                 User user = new User();
-                user.Username = Username;
+                user.Username = MD5Helper.HashstringMd5(Username);
                 user.Password = BCrypt.Net.BCrypt.HashPassword(Password);
                 user.Email = Email;
                 user.AuthorId = 2;
@@ -103,14 +115,23 @@ namespace ProjectFruit.Areas.Admin.Controllers
 
                 var mailHelper = new MailHelper(configration);
 
+                // DateTimeOffset date_sign = DateTimeOffset.Now;
+                DateTimeOffset dateTimeOffset = new DateTimeOffset(DateTime.Now);
+                long timestamp = dateTimeOffset.ToUnixTimeSeconds();
+                string timestampString = timestamp.ToString();
+              //  DateTime date_sign = DateTime.Now;
+              //  string currentTime = DataFormatHelper.FormatTime(date_sign).ToString();
+              //  string codeChess = MD5Helper.HashstringMd5(currentTime);
+              //  string userMD5 = MD5Helper.HashstringMd5(user.Username);
                 var callbackUrl = Url.Action(
                 "ConfirmEmail",
                 "admin",
-                new { userId = user.Id, code = 1234567 },
+                new { userId = user.Username, code = timestampString },
                 protocol: HttpContext.Request.Scheme);
 
                 if (mailHelper.Send("saka.dacloi@gmail.com", Email, "Confirm your email", $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."))
                 {
+                    return View("Notification");
 
                 }
 
@@ -137,26 +158,41 @@ namespace ProjectFruit.Areas.Admin.Controllers
 
 
         [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        [Route("ConfirmEmail")]
+        public IActionResult ConfirmEmail(string userId, long code)
         {
-            //if (userId == null || code == null)
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
+            if (userId == null || code == null)
+            {
+                return RedirectToAction("Login", "DarshBoard");
+            }
 
-            //var user = await _userManager.FindByIdAsync(userId);
-            //if (user == null)
-            //{
-            //    return NotFound($"Unable to load user with ID '{userId}'.");
-            //}
+            //.SequenceEqual(hash2)
+            //string username = MD5Helper.CheckMD5(userId).ToString();
 
-            //var result = await _userManager.ConfirmEmailAsync(user, code);
-            //if (!result.Succeeded)
-            //{
-            //    throw new InvalidOperationException($"Error confirming email for user with ID '{userId}':");
-            //}
+            var username = accountService.findUserName(userId);
+            //  string codeMD5 = MD5Helper.CheckMD5(code).ToString();
 
+            DateTime today = DateTime.Now;
+            DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(code);
+            DateTime dateTimeCode = dateTimeOffset.LocalDateTime;
+            TimeSpan difference = today.Subtract(dateTimeCode);
+
+            //  string checkDate = dateNow - DateTime.Parse(codeMD5);
+            if (username != null && difference.TotalDays < 1) {
+               username.Status = 1;
+                accountService.UpdateUser(username);
+                return View("Login");
+            }else
+            {
+                return View("confirmEmail");
+            }
+                    
+        }
+
+  
+        [Route("notification")]
+        public IActionResult Notification()
+        {
             return View();
         }
 

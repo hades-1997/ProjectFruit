@@ -13,5 +13,7 @@ namespace ProjectFruit.Areas.Admin.Services
 
         public User Register(User user);
 
+        public User findUserName(string username);
+        public User UpdateUser (User user);
     }
 }

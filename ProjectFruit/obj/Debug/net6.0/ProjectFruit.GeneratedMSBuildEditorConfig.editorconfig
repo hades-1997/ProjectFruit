@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\NET_CORE\ProjectFruit\ProjectFruit
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/NET_CORE/ProjectFruit/ProjectFruit/Areas/Admin/Views/DarshBoard/confirmEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFyc2hCb2FyZFxjb25maXJtRW1haWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/NET_CORE/ProjectFruit/ProjectFruit/Areas/Admin/Views/DarshBoard/CreateAuthor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFyc2hCb2FyZFxDcmVhdGVBdXRob3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -26,6 +30,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/NET_CORE/ProjectFruit/ProjectFruit/Areas/Admin/Views/DarshBoard/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFyc2hCb2FyZFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/NET_CORE/ProjectFruit/ProjectFruit/Areas/Admin/Views/DarshBoard/Notification.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFyc2hCb2FyZFxOb3RpZmljYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/NET_CORE/ProjectFruit/ProjectFruit/Areas/Admin/Views/DarshBoard/Register.cshtml]

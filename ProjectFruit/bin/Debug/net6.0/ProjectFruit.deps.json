@@ -16,7 +16,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.6",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.5",
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.13"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.13",
+          "System.Security.Cryptography.Cng": "5.0.0"
         },
         "runtime": {
           "ProjectFruit.dll": {}

@@ -22,8 +22,8 @@ namespace ProjectFruit.Areas.Admin.Services
 
         public User PasswordSignInAsync(string username, string password)
         {
-            string Hashusername = MD5Helper.HashstringMd5(username);
-            var users = dbContext.Users.FirstOrDefault(u => u.Username == Hashusername);
+           // string Hashusername = MD5Helper.HashstringMd5(username);
+            var users = dbContext.Users.FirstOrDefault(u => u.Username == username);
             if (users != null)
             {
                 bool isPasswordCorrect = BCrypt.Net.BCrypt.Verify(password, users.Password);
@@ -89,9 +89,9 @@ namespace ProjectFruit.Areas.Admin.Services
             return user;
         }
 
-        public User findUserName(string username)
+        public User findUserName(string md5username)
         {
-           var result =  dbContext.Users.FirstOrDefault(res => res.Username == username);
+           var result =  dbContext.Users.FirstOrDefault(res => res.Md5username == md5username);
             return result;
         }
     }

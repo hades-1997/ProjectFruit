@@ -106,7 +106,8 @@ namespace ProjectFruit.Areas.Admin.Controllers
             else
             {
                 User user = new User();
-                user.Username = MD5Helper.HashstringMd5(Username);
+                user.Username = Username;
+                user.Md5username = MD5Helper.HashstringMd5(Username);
                 user.Password = BCrypt.Net.BCrypt.HashPassword(Password);
                 user.Email = Email;
                 user.AuthorId = 2;
@@ -126,7 +127,7 @@ namespace ProjectFruit.Areas.Admin.Controllers
                 var callbackUrl = Url.Action(
                 "ConfirmEmail",
                 "admin",
-                new { userId = user.Username, code = timestampString },
+                new { userId = user.Md5username, code = timestampString },
                 protocol: HttpContext.Request.Scheme);
 
                 if (mailHelper.Send("saka.dacloi@gmail.com", Email, "Confirm your email", $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."))
